@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
 import os
+import platform
 import stat
 import urllib.request
 import zipfile
-import platform
-
 from os.path import join
 
 TERRAFORM_NULL_PROVIDER_VERSION = "2.1.2"

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from setuptools import setup
-import shutil
 import os
+import shutil
 from os import makedirs
+
+from setuptools import setup
 
 NULL_PROVIDER_VERSION = "2.1.2"
 
