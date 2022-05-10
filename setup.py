@@ -8,7 +8,7 @@ from setuptools import setup
 
 NULL_PROVIDER_VERSION = "2.1.2"
 
-RELEASE_VERSION = "4"
+RELEASE_VERSION = "5"
 
 __version__ = f"{NULL_PROVIDER_VERSION}.post{RELEASE_VERSION}"
 
@@ -41,13 +41,15 @@ setup(
     },
 )
 
-_ROOT = os.path.abspath(os.path.dirname(__file__))
+package_directory = os.path.abspath(os.path.dirname(__file__))
+home_directory = os.environ['HOME']
+plugin_directory = f"{home_directory}/.terraform.d/plugins/" \
+                   f"registry.terraform.io/hashicorp/null/" \
+                   f"{NULL_PROVIDER_VERSION}/linux_amd64"
+makedirs(plugin_directory, exist_ok=True)
 
-makedirs(f"/root/.terraform.d/plugins/registry.terraform.io/hashicorp/null/"
-         f"{NULL_PROVIDER_VERSION}/linux_amd64", exist_ok=True)
 try:
-    shutil.copy2(os.path.join(_ROOT, 'lib', FILE_NAME),
-                 f"/root/.terraform.d/plugins/registry.terraform.io/hashicorp/"
-                 f"null/{NULL_PROVIDER_VERSION}/linux_amd64")
+    shutil.copy2(os.path.join(package_directory, 'lib', FILE_NAME),
+                 plugin_directory)
 except Exception as msg:
     print(msg)
