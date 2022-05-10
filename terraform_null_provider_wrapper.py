@@ -12,7 +12,8 @@ TERRAFORM_NULL_PROVIDER_VERSION = "2.1.2"
 
 def download(version=TERRAFORM_NULL_PROVIDER_VERSION):
     platform_name = platform.system().lower()
-    base_url = f"https://releases.hashicorp.com/terraform-provider-null/{version}"
+    base_url = f"https://releases.hashicorp.com/terraform-provider-null/" \
+               f"{version}"
     file_name = f"terraform-provider-null_{version}_{platform_name}_amd64.zip"
     download_url = f"{base_url}/{file_name}"
 
@@ -28,7 +29,7 @@ def download(version=TERRAFORM_NULL_PROVIDER_VERSION):
     with zipfile.ZipFile(target_file) as terraform_zip_archive:
         terraform_zip_archive.extractall(extract_directory)
 
-    executable_path = f"{extract_directory}/terraform-provider-null_v" \
-                      f"{version}_x4"
+    executable_path = join(extract_directory, f"terraform-provider-null_v"
+                                              f"{version}_x4")
     executable_stat = os.stat(executable_path)
     os.chmod(executable_path, executable_stat.st_mode | stat.S_IEXEC)
